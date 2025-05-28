@@ -3,23 +3,6 @@ import re
 import random
 from collections import defaultdict
 
-def cleanInput(rawData):
-    data = []
-    if isinstance(rawData, list):
-        inputStr = ' '.join(rawData)
-    else:
-        inputStr = rawData
-    
-    numbers = re.split(r'[,\s]+', inputStr.replace(',', ' ').strip())
-    
-    for num in numbers:
-        if num:
-            try:
-                data.append(int(num))
-            except ValueError:
-                print(f"'{num}' is invalid ")
-    
-    return data
 def createNonHamiltonianGraph(vertices):
     nodes = list(range(1, vertices + 1))
     graph = defaultdict(list)
@@ -45,22 +28,31 @@ def createNonHamiltonianGraph(vertices):
 
 
 def createHamiltonianGraph(vertices, saturation):
-    # Create a Hamiltonian cycle
     nodes = list(range(1, vertices + 1))
     random.shuffle(nodes)
     graph = defaultdict(list)
+    edges = set()
 
+    # Create a Hamiltonian cycle
     for i in range(len(nodes)):
-        graph[nodes[i]].append(nodes[(i + 1) % len(nodes)])
+        u = nodes[i]
+        v = nodes[(i + 1) % len(nodes)]
+        edge = tuple(sorted((u, v)))
+        if edge not in edges:
+            edges.add(edge)
+            graph[u].append(v)
+            graph[v].append(u)
 
     # Add random edges to achieve the desired saturation
     totalPossibleEdges = vertices * (vertices - 1) // 2
     desiredEdges = int((saturation / 100) * totalPossibleEdges)
-    currentEdges = sum(len(neighbors) for neighbors in graph.values()) // 2
+    currentEdges = len(edges)
 
     while currentEdges < desiredEdges:
         u, v = random.sample(nodes, 2)
-        if v not in graph[u]:
+        edge = tuple(sorted((u, v)))
+        if edge not in edges:
+            edges.add(edge)
             graph[u].append(v)
             graph[v].append(u)
             currentEdges += 1
@@ -68,12 +60,14 @@ def createHamiltonianGraph(vertices, saturation):
     # Ensure all nodes have even degree
     for node in nodes:
         if len(graph[node]) % 2 != 0:
-            # Find a neighbor to connect to
             for neighbor in nodes:
-                if neighbor != node and neighbor not in graph[node]:
+                edge = tuple(sorted((node, neighbor)))
+                if neighbor != node and edge not in edges:
+                    edges.add(edge)
                     graph[node].append(neighbor)
                     graph[neighbor].append(node)
                     break
+
     return dict(graph)
 
 def createGraph():
