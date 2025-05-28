@@ -11,6 +11,8 @@ def printMenu():
     print("{}        {}".format("Help", "Shows this menu"))
     print("{}        {}".format("Exit", "Exits the program (or ctrl+D)"))
     print("{}       {}".format("Print", "Prints the graph"))
+    print("{}       {}".format("Euler", "Finds an Euler cycle in the graph"))
+    print("{}       {}".format("hamilton", "Finds a Hamiltonian cycle in the graph"))
     print("========================================")
 
 def interactiveMode(graph):
