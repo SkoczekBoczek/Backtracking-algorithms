@@ -3,6 +3,7 @@ from graphCreation import createGraph
 from operations.showGraph import printGraph
 from operations.TickzpictureExport import exportToTikz
 from operations.findEuler import findEulerCycle
+from operations.findHamilton import findHamiltonianCycle
 
 
 def printMenu():
@@ -32,6 +33,12 @@ def interactiveMode(graph):
                     print("Euler cycle:", cycle)
                 else:
                     print("No Euler cycle exists in this graph.")
+            elif command == "hamilton":
+                cycle = findHamiltonianCycle(graph)
+                if cycle:
+                    print("Hamilton cycle:", cycle)
+                else:
+                    print("No Hamilton cycle exists in this graph.")
             elif command == "export":
                 filename = input("filename> ")
                 exportToTikz(graph, filename)
