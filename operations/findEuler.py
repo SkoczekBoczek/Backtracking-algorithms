@@ -6,7 +6,7 @@ def findEulerCycle(graph):
             return None
 
     localGraph = {u: list(vs) for u, vs in graph.items()}
-    print(localGraph)
+
     stack = []
     circuit = []
     current = next((node for node in localGraph if localGraph[node]), None)
@@ -17,7 +17,6 @@ def findEulerCycle(graph):
 
     stack.append(current)
 
-    print(localGraph[current])
     while stack:
         if localGraph[current]:
             stack.append(current)

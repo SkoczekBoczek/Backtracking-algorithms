@@ -1,19 +1,19 @@
 import sys
 from graphCreation import createGraph
 from operations.showGraph import printGraph
-from operations.TickzpictureExport import exportToTikz
+from operations.tickzpictureExport import exportToTikz
 from operations.findEuler import findEulerCycle
 from operations.findHamilton import findHamiltonianCycle
 
 
 def printMenu():
-    print("========================================")
+    print("============================================")
     print("{}        {}".format("Help", "Shows this menu"))
     print("{}        {}".format("Exit", "Exits the program (or ctrl+D)"))
     print("{}       {}".format("Print", "Prints the graph"))
     print("{}       {}".format("Euler", "Finds an Euler cycle in the graph"))
-    print("{}       {}".format("hamilton", "Finds a Hamiltonian cycle in the graph"))
-    print("========================================")
+    print("{}    {}".format("Hamilton", "Finds a Hamiltonian cycle in the graph"))
+    print("============================================")
 
 def interactiveMode(graph):
     print("\nInteractive mode (type 'help' for commands.)")
