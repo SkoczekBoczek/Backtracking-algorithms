@@ -70,6 +70,7 @@ def createHamiltonianGraph(vertices, saturation):
                 oddNodes.pop(i)
                 break
 
+    return dict(graph)
 
 def createGraph():
     if len(sys.argv) < 2 or sys.argv[1] not in ["--hamilton", "--non-hamilton"]:
