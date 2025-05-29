@@ -1,7 +1,7 @@
 import sys
 from graphCreation import createGraph
 from operations.showGraph import printGraph
-from operations.tickzpictureExport import exportToTikz
+from operations.TickzpictureExport import exportToTikz
 from operations.findEuler import findEulerCycle
 from operations.findHamilton import findHamiltonianCycle
 
