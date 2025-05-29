@@ -58,17 +58,15 @@ def createHamiltonianGraph(vertices, saturation):
             currentEdges += 1
 
     # Ensure all nodes have even degree
-    oddNodes = [node for node in nodes if len(graph[node]) % 2 != 0]
-    while len(oddNodes) >= 2:
-        u = oddNodes.pop()
-        for i, v in enumerate(oddNodes):
-            edge = tuple(sorted((u, v)))
-            if edge not in edges:
-                edges.add(edge)
-                graph[u].append(v)
-                graph[v].append(u)
-                oddNodes.pop(i)
-                break
+    for node in nodes:
+        if len(graph[node]) % 2 != 0:
+            for neighbor in nodes:
+                edge = tuple(sorted((node, neighbor)))
+                if neighbor != node and edge not in edges:
+                    edges.add(edge)
+                    graph[node].append(neighbor)
+                    graph[neighbor].append(node)
+                    break
 
     return dict(graph)
 
